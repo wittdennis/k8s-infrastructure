@@ -9,7 +9,7 @@ resource "hcloud_load_balancer" "lb" {
   algorithm {
     type = "least_connections"
   }
-  delete_protection = true
+  delete_protection = var.delete_protection
 }
 
 resource "hcloud_load_balancer_network" "lb_net" {
