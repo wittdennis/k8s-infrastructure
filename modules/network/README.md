@@ -39,4 +39,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | n/a |
+| <a name="output_subnet_ip_range"></a> [subnet\_ip\_range](#output\_subnet\_ip\_range) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

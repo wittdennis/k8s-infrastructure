@@ -10,7 +10,9 @@
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_hcloud"></a> [hcloud](#provider\_hcloud) | 1.45.0 |
 
 ## Modules
 
@@ -21,7 +23,10 @@ No providers.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [hcloud_firewall.firewall_master](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall) | resource |
+| [hcloud_firewall.firewall_worker](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall) | resource |
 
 ## Inputs
 
