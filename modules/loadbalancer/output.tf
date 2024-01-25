@@ -1,3 +1,7 @@
+output "loadbalancer_id" {
+  value = hcloud_load_balancer.lb.id
+}
+
 output "loadbalancer_name" {
   value = hcloud_load_balancer.lb.name
 }

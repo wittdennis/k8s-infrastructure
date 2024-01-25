@@ -5,7 +5,6 @@ variable "name" {
 }
 
 variable "location" {
-  default     = "fsn1"
   description = "The datacenter the load balancer should be provisioned in"
   type        = string
 }
@@ -23,7 +22,7 @@ variable "subnet_id" {
 }
 
 variable "delete_protection" {
-  default     = true
+  default     = false
   description = "Controls whether the loadbalancer should be provisioned with delete protection enabled"
   type        = string
 }
