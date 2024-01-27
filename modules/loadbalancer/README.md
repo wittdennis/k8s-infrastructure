@@ -32,9 +32,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_delete_protection"></a> [delete\_protection](#input\_delete\_protection) | Controls whether the loadbalancer should be provisioned with delete protection enabled | `string` | `true` | no |
+| <a name="input_delete_protection"></a> [delete\_protection](#input\_delete\_protection) | Controls whether the loadbalancer should be provisioned with delete protection enabled | `string` | `false` | no |
 | <a name="input_load_balancer_type"></a> [load\_balancer\_type](#input\_load\_balancer\_type) | Type of the load balancer to provison | `string` | `"lb11"` | no |
-| <a name="input_location"></a> [location](#input\_location) | The datacenter the load balancer should be provisioned in | `string` | `"fsn1"` | no |
+| <a name="input_location"></a> [location](#input\_location) | The datacenter the load balancer should be provisioned in | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The name of the load balancer | `string` | `""` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | Id of the subnet the load balancer should be added to | `string` | `""` | no |
 
@@ -42,6 +42,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_loadbalancer_id"></a> [loadbalancer\_id](#output\_loadbalancer\_id) | n/a |
 | <a name="output_loadbalancer_ipv4"></a> [loadbalancer\_ipv4](#output\_loadbalancer\_ipv4) | n/a |
 | <a name="output_loadbalancer_ipv6"></a> [loadbalancer\_ipv6](#output\_loadbalancer\_ipv6) | n/a |
 | <a name="output_loadbalancer_name"></a> [loadbalancer\_name](#output\_loadbalancer\_name) | n/a |

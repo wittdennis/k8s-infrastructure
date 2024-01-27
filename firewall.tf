@@ -1,4 +1,4 @@
-resource "hcloud_firewall" "firewall_worker" {
+resource "hcloud_firewall" "firewall_control_plane" {
   name = "fw-worker-0"
 
   rule {
