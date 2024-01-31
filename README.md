@@ -44,10 +44,8 @@
 
 | Name | Description |
 |------|-------------|
-| <a name="output_control_nodes_public_ipv4"></a> [control\_nodes\_public\_ipv4](#output\_control\_nodes\_public\_ipv4) | n/a |
-| <a name="output_control_nodes_public_ipv6"></a> [control\_nodes\_public\_ipv6](#output\_control\_nodes\_public\_ipv6) | n/a |
+| <a name="output_control_nodes"></a> [control\_nodes](#output\_control\_nodes) | n/a |
 | <a name="output_loadbalancer_ipv4"></a> [loadbalancer\_ipv4](#output\_loadbalancer\_ipv4) | n/a |
 | <a name="output_loadbalancer_ipv6"></a> [loadbalancer\_ipv6](#output\_loadbalancer\_ipv6) | n/a |
-| <a name="output_worker_nodes_public_ipv4"></a> [worker\_nodes\_public\_ipv4](#output\_worker\_nodes\_public\_ipv4) | n/a |
-| <a name="output_worker_nodes_public_ipv6"></a> [worker\_nodes\_public\_ipv6](#output\_worker\_nodes\_public\_ipv6) | n/a |
+| <a name="output_worker_nodes"></a> [worker\_nodes](#output\_worker\_nodes) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
