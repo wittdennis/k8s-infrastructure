@@ -21,13 +21,15 @@
 | <a name="module_control_nodes"></a> [control\_nodes](#module\_control\_nodes) | ./modules/compute | n/a |
 | <a name="module_loadbalancer"></a> [loadbalancer](#module\_loadbalancer) | ./modules/loadbalancer | n/a |
 | <a name="module_network"></a> [network](#module\_network) | ./modules/network | n/a |
+| <a name="module_ssh_keys"></a> [ssh\_keys](#module\_ssh\_keys) | ./modules/ssh_key | n/a |
+| <a name="module_worker_nodes"></a> [worker\_nodes](#module\_worker\_nodes) | ./modules/compute | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [hcloud_firewall.firewall_control_plane](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall) | resource |
-| [hcloud_firewall.firewall_master](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall) | resource |
+| [hcloud_firewall.firewall_worker](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall) | resource |
 
 ## Inputs
 
@@ -42,6 +44,10 @@
 
 | Name | Description |
 |------|-------------|
-| <a name="output_lb_ipv4"></a> [lb\_ipv4](#output\_lb\_ipv4) | n/a |
-| <a name="output_lb_ipv6"></a> [lb\_ipv6](#output\_lb\_ipv6) | n/a |
+| <a name="output_control_nodes_public_ipv4"></a> [control\_nodes\_public\_ipv4](#output\_control\_nodes\_public\_ipv4) | n/a |
+| <a name="output_control_nodes_public_ipv6"></a> [control\_nodes\_public\_ipv6](#output\_control\_nodes\_public\_ipv6) | n/a |
+| <a name="output_loadbalancer_ipv4"></a> [loadbalancer\_ipv4](#output\_loadbalancer\_ipv4) | n/a |
+| <a name="output_loadbalancer_ipv6"></a> [loadbalancer\_ipv6](#output\_loadbalancer\_ipv6) | n/a |
+| <a name="output_worker_nodes_public_ipv4"></a> [worker\_nodes\_public\_ipv4](#output\_worker\_nodes\_public\_ipv4) | n/a |
+| <a name="output_worker_nodes_public_ipv6"></a> [worker\_nodes\_public\_ipv6](#output\_worker\_nodes\_public\_ipv6) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

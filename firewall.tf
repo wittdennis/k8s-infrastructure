@@ -1,5 +1,5 @@
-resource "hcloud_firewall" "firewall_control_plane" {
-  name = "fw-worker-0"
+resource "hcloud_firewall" "firewall_worker" {
+  name = "fw-worker"
 
   rule {
     direction   = "in"
@@ -99,8 +99,8 @@ resource "hcloud_firewall" "firewall_control_plane" {
   }
 }
 
-resource "hcloud_firewall" "firewall_master" {
-  name = "fw-master-0"
+resource "hcloud_firewall" "firewall_control_plane" {
+  name = "fw-control-plane"
   rule {
     direction   = "in"
     protocol    = "tcp"
