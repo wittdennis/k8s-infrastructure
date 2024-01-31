@@ -26,6 +26,7 @@ module "control_nodes" {
   firewall_ids      = [hcloud_firewall.firewall_control_plane.id]
   subnet_id         = module.network.subnet_id
   ssh_key_ids       = module.ssh_keys.ssh_key_ids
+  count             = 1
 
   labels = {
     "role" : "control-plane"
@@ -49,8 +50,7 @@ module "worker_nodes" {
   load_balancer_id  = module.loadbalancer.loadbalancer_id
   subnet_id         = module.network.subnet_id
   ssh_key_ids       = module.ssh_keys.ssh_key_ids
-  # amount            = 2
-  count = 2
+  count             = 2
 
   labels = {
     "role" : "worker"
