@@ -1,9 +1,3 @@
-variable "amount" {
-  type        = number
-  default     = 1
-  description = "Number of compute nodes to provision."
-}
-
 variable "name_prefix" {
   type        = string
   description = "The name prefix a provisioned node should have."
@@ -16,30 +10,30 @@ variable "server_type" {
 
 variable "location" {
   type        = string
-  description = "The location the nodes should be provisioned in."
+  description = "The location the node should be provisioned in."
 }
 
 variable "image" {
   type        = string
-  description = "OS image to use for the provisioned nodes."
+  description = "OS image to use for the provisioned node."
 }
 
 variable "labels" {
   type        = map(string)
-  description = "Labels to give the provisioned nodes."
+  description = "Labels to give the provisioned node."
   default     = {}
 }
 
 variable "ipv4_enabled" {
   type        = bool
   default     = true
-  description = "Flag indicating if a ipv4 should be provisioned for the nodes."
+  description = "Flag indicating if a ipv4 should be provisioned for the node."
 }
 
 variable "ipv6_enabled" {
   type        = bool
   default     = true
-  description = "Flag indicating if a ipv6 should be provisioned for the nodes."
+  description = "Flag indicating if a ipv6 should be provisioned for the node."
 }
 
 variable "firewall_ids" {
@@ -48,10 +42,10 @@ variable "firewall_ids" {
   description = "Ids of the firewalls the nodes should be behind."
 }
 
-variable "ssh_keys" {
-  type        = list(string)
+variable "ssh_key_ids" {
+  type        = set(string)
   default     = []
-  description = "List of ssh keys that should be added on provision."
+  description = "Ids of the ssh keys to add to the nodes."
 }
 
 variable "user_data" {
