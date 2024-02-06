@@ -17,7 +17,8 @@ module "loadbalancer" {
 }
 
 module "control_nodes" {
-  source            = "./modules/compute"
+  source            = "wittdennis/compute/hetzner"
+  version           = "1.0.0"
   server_type       = "cax21"
   name_prefix       = "control"
   delete_protection = true
@@ -40,7 +41,8 @@ module "control_nodes" {
 }
 
 module "worker_nodes" {
-  source            = "./modules/compute"
+  source            = "wittdennis/compute/hetzner"
+  version           = "1.0.0"
   server_type       = "cax21"
   name_prefix       = "worker"
   delete_protection = true
