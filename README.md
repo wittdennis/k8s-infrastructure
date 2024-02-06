@@ -18,6 +18,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_bastion_ssh"></a> [bastion\_ssh](#module\_bastion\_ssh) | wittdennis/compute/hetzner | 1.0.0 |
 | <a name="module_control_nodes"></a> [control\_nodes](#module\_control\_nodes) | wittdennis/compute/hetzner | 1.0.0 |
 | <a name="module_loadbalancer"></a> [loadbalancer](#module\_loadbalancer) | ./modules/loadbalancer | n/a |
 | <a name="module_network"></a> [network](#module\_network) | ./modules/network | n/a |
@@ -28,6 +29,7 @@
 
 | Name | Type |
 |------|------|
+| [hcloud_firewall.firewall_bastion_ssh](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall) | resource |
 | [hcloud_firewall.firewall_control_plane](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall) | resource |
 | [hcloud_firewall.firewall_worker](https://registry.terraform.io/providers/hetznercloud/hcloud/latest/docs/resources/firewall) | resource |
 
@@ -44,6 +46,7 @@
 
 | Name | Description |
 |------|-------------|
+| <a name="output_bastion_host_ssh"></a> [bastion\_host\_ssh](#output\_bastion\_host\_ssh) | n/a |
 | <a name="output_control_nodes"></a> [control\_nodes](#output\_control\_nodes) | n/a |
 | <a name="output_loadbalancer_ipv4"></a> [loadbalancer\_ipv4](#output\_loadbalancer\_ipv4) | n/a |
 | <a name="output_loadbalancer_ipv6"></a> [loadbalancer\_ipv6](#output\_loadbalancer\_ipv6) | n/a |

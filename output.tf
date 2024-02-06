@@ -23,3 +23,12 @@ output "worker_nodes" {
     ipv6 = node.public_ipv6
   }]
 }
+
+output "bastion_host_ssh" {
+  value = [for i, node in module.bastion_ssh : {
+    id   = node.server_id
+    name = node.name
+    ipv4 = node.public_ipv4
+    ipv6 = node.public_ipv6
+  }]
+}

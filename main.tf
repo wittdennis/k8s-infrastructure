@@ -30,14 +30,9 @@ module "control_nodes" {
   count             = 1
 
   labels = {
-    "role" : "control-plane"
+    "role" : "kubernetes"
+    "kubernetes-role" : "control-plane"
   }
-
-  depends_on = [
-    hcloud_firewall.firewall_control_plane,
-    module.loadbalancer,
-    module.ssh_keys
-  ]
 }
 
 module "worker_nodes" {
@@ -55,13 +50,29 @@ module "worker_nodes" {
   count             = 2
 
   labels = {
-    "role" : "worker"
+    "role" : "kubernetes"
+    "kubernetes-role" : "worker"
   }
-
-  depends_on = [
-    hcloud_firewall.firewall_control_plane,
-    module.loadbalancer,
-    module.ssh_keys
-  ]
 }
 
+module "bastion_ssh" {
+  source             = "wittdennis/compute/hetzner"
+  version            = "1.0.0"
+  server_type        = "cax11"
+  name               = "bastion-ssh"
+  image              = "centos-stream-9"
+  auto_generate_name = false
+  delete_protection  = true
+  ipv4_enabled       = false
+  ipv6_enabled       = true
+  location           = var.location
+  subnet_id          = module.network.subnet_id
+  ssh_key_ids        = module.ssh_keys.ssh_key_ids
+  firewall_ids       = [hcloud_firewall.firewall_bastion_ssh.id]
+  count              = 1
+
+  labels = {
+    "role" : "bastion-host"
+    "bastion-role" : "ssh"
+  }
+}
