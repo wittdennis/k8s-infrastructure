@@ -1,3 +1,18 @@
+resource "hcloud_firewall" "firewall_bastion_ssh" {
+  name = "fw-bastion-ssh"
+
+  rule {
+    direction   = "in"
+    protocol    = "tcp"
+    port        = "22"
+    description = "ssh"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+}
+
 resource "hcloud_firewall" "firewall_worker" {
   name = "fw-worker"
 
