@@ -18,11 +18,11 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_control_nodes"></a> [control\_nodes](#module\_control\_nodes) | ./modules/compute | n/a |
+| <a name="module_control_nodes"></a> [control\_nodes](#module\_control\_nodes) | wittdennis/compute/hetzner | 1.0.0 |
 | <a name="module_loadbalancer"></a> [loadbalancer](#module\_loadbalancer) | ./modules/loadbalancer | n/a |
 | <a name="module_network"></a> [network](#module\_network) | ./modules/network | n/a |
 | <a name="module_ssh_keys"></a> [ssh\_keys](#module\_ssh\_keys) | ./modules/ssh_key | n/a |
-| <a name="module_worker_nodes"></a> [worker\_nodes](#module\_worker\_nodes) | ./modules/compute | n/a |
+| <a name="module_worker_nodes"></a> [worker\_nodes](#module\_worker\_nodes) | wittdennis/compute/hetzner | 1.0.0 |
 
 ## Resources
 

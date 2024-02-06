@@ -8,7 +8,7 @@ output "loadbalancer_ipv6" {
 
 output "control_nodes" {
   value = [for i, node in module.control_nodes : {
-    id   = node.node_id
+    id   = node.server_id
     name = node.name
     ipv4 = node.public_ipv4
     ipv6 = node.public_ipv6
@@ -17,7 +17,7 @@ output "control_nodes" {
 
 output "worker_nodes" {
   value = [for i, node in module.worker_nodes : {
-    id   = node.node_id
+    id   = node.server_id
     name = node.name
     ipv4 = node.public_ipv4
     ipv6 = node.public_ipv6
