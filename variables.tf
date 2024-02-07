@@ -13,7 +13,7 @@ variable "location" {
 
 variable "server_image" {
   type        = string
-  default     = "fedora-39"
+  default     = "alma-9"
   description = "The image to use for new server provisioning."
 }
 

@@ -60,7 +60,7 @@ module "bastion_ssh" {
   version            = "1.0.0"
   server_type        = "cax11"
   name               = "bastion-ssh"
-  image              = "centos-stream-9"
+  image              = "alma-9"
   auto_generate_name = false
   delete_protection  = true
   ipv4_enabled       = false
