@@ -39,7 +39,7 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_hcloud_token"></a> [hcloud\_token](#input\_hcloud\_token) | Hetzner API token. | `string` | `""` | no |
 | <a name="input_location"></a> [location](#input\_location) | The datacenter resources should be created at. | `string` | `"fsn1"` | no |
-| <a name="input_server_image"></a> [server\_image](#input\_server\_image) | The image to use for new server provisioning. | `string` | `"fedora-39"` | no |
+| <a name="input_server_image"></a> [server\_image](#input\_server\_image) | The image to use for new server provisioning. | `string` | `"alma-9"` | no |
 | <a name="input_ssh_keys"></a> [ssh\_keys](#input\_ssh\_keys) | List of ssh keys to add to newly provisioned servers. | `list(string)` | <pre>[<br>  "~/.ssh/id_private.pub"<br>]</pre> | no |
 
 ## Outputs

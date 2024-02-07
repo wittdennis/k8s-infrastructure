@@ -11,6 +11,17 @@ resource "hcloud_firewall" "firewall_bastion_ssh" {
       "::/0"
     ]
   }
+
+  rule {
+    direction   = "in"
+    protocol    = "tcp"
+    port        = "12458"
+    description = "custom ssh"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
 }
 
 resource "hcloud_firewall" "firewall_worker" {
@@ -19,17 +30,6 @@ resource "hcloud_firewall" "firewall_worker" {
   rule {
     direction   = "in"
     protocol    = "tcp"
-    port        = "22"
-    description = "ssh"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
     port        = "any"
     description = "private net open"
     source_ips = [
@@ -44,110 +44,12 @@ resource "hcloud_firewall" "firewall_worker" {
     description = "private net open"
     source_ips = [
       module.network.subnet_ip_range
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "5473"
-    description = "calico typha"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "10250"
-    description = "kubelet-api"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "10260"
-    description = "cert-manager-webhook"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "9100"
-    description = "node-exporter"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "30000-32767"
-    description = "nodeport"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "udp"
-    port        = "30000-32767"
-    description = "nodeport"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
     ]
   }
 }
 
 resource "hcloud_firewall" "firewall_control_plane" {
   name = "fw-control-plane"
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "22"
-    description = "ssh"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "10257"
-    description = "kube-controller-manager"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "10259"
-    description = "kube-scheduler"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
 
   rule {
     direction   = "in"
@@ -163,28 +65,6 @@ resource "hcloud_firewall" "firewall_control_plane" {
   rule {
     direction   = "in"
     protocol    = "tcp"
-    port        = "10250"
-    description = "kubelet-api"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "5473"
-    description = "calico typha"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
     port        = "any"
     description = "private net open"
     source_ips = [
@@ -207,39 +87,6 @@ resource "hcloud_firewall" "firewall_control_plane" {
     protocol    = "tcp"
     port        = "10260"
     description = "cert-manager-webhook"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "9100"
-    description = "node-exporter"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "30000-32767"
-    description = "nodeport"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "udp"
-    port        = "30000-32767"
-    description = "nodeport"
     source_ips = [
       "0.0.0.0/0",
       "::/0"
