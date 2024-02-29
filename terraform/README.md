@@ -1,4 +1,4 @@
-# k8s-infrastructure
+# terraform
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

@@ -1,0 +1,9 @@
+plugin: hetzner.hcloud.hcloud
+status: running
+label_selector: "role=kubernetes"
+compose: 
+  ansible_host: private_networks[0].ip
+
+keyed_groups:
+  - key: labels
+    prefix: label

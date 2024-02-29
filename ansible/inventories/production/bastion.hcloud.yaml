@@ -1,0 +1,8 @@
+plugin: hetzner.hcloud.hcloud
+status: running
+connect_with: public_ipv6
+label_selector: "bastion-role=ssh"
+
+keyed_groups:
+  - key: labels
+    prefix: label

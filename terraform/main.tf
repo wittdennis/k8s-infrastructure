@@ -53,6 +53,10 @@ module "worker_nodes" {
     "role" : "kubernetes"
     "kubernetes-role" : "worker"
   }
+
+  depends_on = [
+    module.loadbalancer
+  ]
 }
 
 module "bastion_ssh" {

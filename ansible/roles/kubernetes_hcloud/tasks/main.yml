@@ -1,0 +1,102 @@
+---
+- name: Ensure hcloud token is defined
+  ansible.builtin.assert:
+    that:
+      - kubernetes_hcloud__token is defined
+      - kubernetes_hcloud__token | length > 0
+      - kubernetes_hcloud__token != None
+    fail_msg: "kubernetes_hcloud__token needs to be set in order for the role to work"
+
+- name: Ensure pod cidr is defined
+  ansible.builtin.assert:
+    that:
+      - kubernetes_hcloud__cluster_pod_cidr is defined
+      - kubernetes_hcloud__cluster_pod_cidr | length > 0
+      - kubernetes_hcloud__cluster_pod_cidr != None
+    fail_msg: "kubernetes_hcloud__cluster_pod_cidr needs to be set in order for the role to work"
+
+- name: Ensure network name is set if networking is enabled
+  ansible.builtin.assert:
+    that:
+      - kubernetes_hcloud__network_name is defined
+      - kubernetes_hcloud__network_name | length > 0
+      - kubernetes_hcloud__network_name != None
+    fail_msg: "kubernetes_hcloud__network_name needs to be set if networking is enabled"
+  when: kubernetes_hcloud__networking_enabled
+
+- name: Ensure pip is installed
+  ansible.builtin.command:
+    cmd: python3 -m ensurepip --upgrade
+  register: pip_install
+  changed_when: "'Requirement already satisfied: pip' not in pip_install.stdout"
+
+- name: Copy requirements.txt to system
+  ansible.builtin.copy:
+    src: requirements.txt
+    dest: /tmp/requirements.txt
+    mode: "0644"
+
+- name: Ensure required python libraries are installed
+  ansible.builtin.pip:
+    requirements: /tmp/requirements.txt
+
+- name: Remove requirements.txt from system
+  ansible.builtin.file:
+    path: /tmp/requirements.txt
+    state: absent
+
+- name: Ensure kubelet service directory exists
+  ansible.builtin.file:
+    state: directory
+    path: "/etc/systemd/system/kubelet.service.d"
+    mode: "0755"
+  when: kubernetes_hcloud__cloud_provider_kubelet_extra_args_through_systemd_unit
+
+- name: Configure external cloud provider for kubelet
+  ansible.builtin.copy:
+    content: |
+      [Service]
+      Environment="KUBELET_EXTRA_ARGS=--cloud-provider=external"
+    dest: /etc/systemd/system/kubelet.service.d/20-hcloud.conf
+    mode: "0644"
+  notify: Restart kubelet
+  when: kubernetes_hcloud__cloud_provider_kubelet_extra_args_through_systemd_unit
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+  when: kubernetes_hcloud__cloud_provider_kubelet_extra_args_through_systemd_unit
+
+- name: Create hcloud secret
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Secret
+      type: Opaque
+      metadata:
+        name: hcloud
+        namespace: kube-system
+      data:
+        token: "{{ kubernetes_hcloud__token | b64encode }}"
+        network: "{{ kubernetes_hcloud__network_name | b64encode }}"
+
+- name: Add hcloud helm repo
+  kubernetes.core.helm_repository:
+    name: hcloud
+    repo_url: https://charts.hetzner.cloud
+
+- name: Deploy hcloud cloud controler manager
+  kubernetes.core.helm:
+    name: hccm
+    chart_ref: hcloud/hcloud-cloud-controller-manager
+    release_namespace: kube-system
+    chart_version: "{{ kubernetes_hcloud__controller_manager_chart_version }}"
+    values: "{{ lookup('ansible.builtin.template', 'hcloud-cloud-controller-manager-values.yaml.j2') | from_yaml }}"
+
+- name: Deploy hcloud csi-driver
+  kubernetes.core.helm:
+    name: hcloud-csi
+    chart_ref: hcloud/hcloud-csi
+    release_namespace: kube-system
+    chart_version: "{{ kubernetes_hcloud__csi_driver_chart_version }}"
+    values: "{{ lookup('ansible.builtin.template', 'hcloud-csi-driver-values.yaml.j2') | from_yaml }}"
