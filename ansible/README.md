@@ -21,3 +21,4 @@
     ```sh
     ansible-playbook -i inventories/production 10-kubernetes-cluster.yml --vault-pass-file <your-vault-pass-file> -K
     ```
+    

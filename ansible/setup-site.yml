@@ -1,0 +1,36 @@
+---
+- name: Configure bastion host
+  hosts: label_bastion_role_ssh
+  vars_files:
+    - ./vars.yml
+  remote_user: "{{ personal_user }}"
+  become: true
+  become_method: ansible.builtin.sudo
+  become_user: root
+  roles:
+    - role: exploide.dnf-automatic
+      vars:
+        dnf_automatic_upgrade_type: security
+        dnf_automatic_reboot: true
+        dnf_automatic_reboot_time: "03:00"
+    - devsec.hardening.os_hardening
+    - role: devsec.hardening.ssh_hardening
+      vars:
+        ssh_server_ports: ["{{ ssh_custom_port }}"] # noqa: var-naming[no-role-prefix]
+        ssh_allow_users: "{{ personal_user }}" # noqa: var-naming[no-role-prefix]
+        ssh_listen_to: "{{ ssh_listen_addresses }}" # noqa: var-naming[no-role-prefix]
+        ssh_allow_tcp_forwarding: "local" # noqa: var-naming[no-role-prefix]
+
+- name: Configure kubernetes hosts
+  hosts: label_role_kubernetes
+  vars_files:
+    - ./vars.yml
+  remote_user: "{{ personal_user }}"
+  become: true
+  become_method: ansible.builtin.sudo
+  become_user: root
+  roles:
+    - role: devsec.hardening.ssh_hardening
+      vars:
+        ssh_allow_users: "{{ personal_user }}" # noqa: var-naming[no-role-prefix]
+        ssh_listen_to: "{{ ssh_listen_addresses }}" # noqa: var-naming[no-role-prefix]

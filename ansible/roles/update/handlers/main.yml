@@ -1,0 +1,4 @@
+---
+- name: Autoremove unneeded packages
+  ansible.builtin.dnf:
+    autoremove: true

@@ -1,0 +1,13 @@
+---
+- name: Create personal user bastion
+  hosts: all
+  remote_user: root
+  vars_files:
+    - ./vars.yml
+  roles:
+    - role: user
+      vars:
+        user__login: "{{ personal_user }}"
+        user__password: "{{ personal_user_password }}"
+        user__public_key_file: "{{ personal_user_public_key_file }}"
+        user__allow_sudo_superuser: true
