@@ -1,0 +1,3 @@
+---
+# defaults file for roles/kubeadm_join
+kubeadm_join__join_configuration: {}

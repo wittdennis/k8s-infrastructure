@@ -1,0 +1,32 @@
+---
+# - name: Add cilium helm repo
+#   kubernetes.core.helm_repository:
+#     name: cilium
+#     repo_url: https://helm.cilium.io/
+
+# - name: Deploy hcloud cloud controler manager
+#   kubernetes.core.helm:
+#     name: cilium
+#     chart_ref: cilium/cilium
+#     release_namespace: kube-system
+#     chart_version: "{{ cilium__version }}"
+#     values: "{{ lookup('ansible.builtin.template', 'cilium-values.yaml.j2') | from_yaml }}"
+
+- name: Ensure correct install method
+  ansible.builtin.assert:
+    that:
+      - cilium__cli_install_method is defined
+      - cilium__cli_install_method | length > 0
+      - cilium__cli_install_method != None
+      - cilium__cli_install_method == "cli"
+    fail_msg: "cilium__cli_install_method needs to be 'cli'"
+
+- name: Install cli
+  ansible.builtin.include_tasks:
+    file: install-cli.yml
+  when: cilium__install_cli or cilium__install_method == "cli" | default(false)
+
+- name: Install via cli
+  ansible.builtin.include_tasks:
+    file: cli-method.yml
+  when: cilium__install_method == "cli"

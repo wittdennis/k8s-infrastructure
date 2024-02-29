@@ -1,0 +1,23 @@
+---
+- name: Add user
+  ansible.builtin.user:
+    name: "{{ user__login | mandatory }}"
+    comment: "{{ user__comment }}"
+    password: "{{ user__password | mandatory }}"
+    update_password: on_create
+    shell: "{{ user__shell }}"
+
+- name: Add authorized_key
+  ansible.posix.authorized_key:
+    key: "{{ lookup('file', '{{ user__public_key_file | mandatory }}') }}"
+    user: "{{ user__login | mandatory }}"
+    state: present
+
+- name: Grant sudo superuser rights
+  community.general.sudoers:
+    name: "{{ user__login }}-superuser"
+    user: "{{ user__login }}"
+    state: present
+    commands: ALL
+    nopassword: false
+  when: user__allow_sudo_superuser | bool

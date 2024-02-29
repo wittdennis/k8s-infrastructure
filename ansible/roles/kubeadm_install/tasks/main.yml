@@ -1,0 +1,76 @@
+---
+- name: Ensure dependencies are installed
+  ansible.builtin.package:
+    name:
+      - curl
+      - ca-certificates
+      - kernel-modules-extra
+    state: present
+
+- name: Disable swap for the current session
+  ansible.builtin.command:
+    cmd: swapoff -a
+  changed_when: false
+
+- name: Ensure that swap is disabled
+  ansible.builtin.replace:
+    path: /etc/fstab
+    regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
+    replace: '# \1'
+
+- name: Disable selinux
+  ansible.posix.selinux:
+    policy: targeted
+    state: permissive
+  when: kubeadm_install__disable_selinux
+
+- name: Set repo version
+  ansible.builtin.set_fact:
+    kubernetes_repo_version: "{{ kubeadm_install__kubernetes_version | split('.') }}"
+
+- name: Setup Kubernetes yum repository
+  ansible.builtin.yum_repository:
+    name: kubernetes
+    description: Official Kubernetes yum repository
+    mode: "0644"
+    baseurl:
+      - https://pkgs.k8s.io/core:/stable:/{{ kubernetes_repo_version.0 }}.{{ kubernetes_repo_version.1 }}/rpm
+    enabled: true
+    gpgcheck: true
+    gpgkey:
+      - https://pkgs.k8s.io/core:/stable:/{{ kubernetes_repo_version.0 }}.{{ kubernetes_repo_version.1 }}/rpm/repodata/repomd.xml.key
+    exclude:
+      - kubelet
+      - kubeadm
+      - kubectl
+      - cri-tools
+      - kubernetes-cni
+    state: present
+
+- name: Update sysctl to allow networking
+  ansible.builtin.copy:
+    content: |
+      net.bridge.bridge-nf-call-ip6tables = 1
+      net.bridge.bridge-nf-call-iptables = 1
+      net.ipv4.ip_forward = 1
+      net.ipv6.conf.all.forwarding = 1
+    dest: /etc/sysctl.d/kubernetes.conf
+    mode: "0644"
+  notify: Reload sysctl
+
+- name: Install Kubernetes packages
+  ansible.builtin.dnf:
+    name:
+      - kubelet
+      - kubeadm
+      - kubectl
+    disable_excludes: all
+  notify: Restart kubelet
+
+- name: Enable kubelet service
+  ansible.builtin.service:
+    name: kubelet
+    enabled: true
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

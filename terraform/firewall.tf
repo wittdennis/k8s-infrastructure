@@ -4,17 +4,6 @@ resource "hcloud_firewall" "firewall_bastion_ssh" {
   rule {
     direction   = "in"
     protocol    = "tcp"
-    port        = "22"
-    description = "ssh"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
     port        = "12458"
     description = "custom ssh"
     source_ips = [
