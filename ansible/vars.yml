@@ -1,0 +1,52 @@
+---
+personal_user: dwitt
+personal_user_password: "$6$rounds=656000$cv1k9.FvsF2h$UY7sr5CyzSJP6DM7TT1o4dsxDuzZxTa5vR/HZ.JQL4pcSrspcXK5C4PoL35plTLix9DoXAuJcbIZw8mgXPM7j/"
+personal_user_public_key_file: ~/.ssh/id_private.pub
+ssh_custom_port: 12458
+ssh_listen_addresses: ["0.0.0.0", "::"]
+
+helm_version: v3.14.0
+yq_version: v4.42.1
+
+kubernetes_version: v1.29.2
+kubernetes_pod_cidr: "10.128.0.0/16"
+kubernetes_cluster_init_configuration:
+  controlPlaneEndpoint: k8s.derwitt.me
+  localAPIEndpoint:
+    advertiseAddress: "{{ ansible_all_ipv4_addresses | ansible.utils.ipaddr('10.96.0.0/16') | first }}"
+    bindPort: 443
+  nodeRegistration:
+    kubeletExtraArgs:
+      cloud-provider: external
+kubernetes_cluster_join_configuration:
+  nodeRegistration:
+    kubeletExtraArgs:
+      cloud-provider: external
+kubernetes_cluster_configuration:
+  networking:
+    podSubnet: "{{ kubernetes_pod_cidr }}"
+  kubernetesVersion: "{{ kubernetes_version }}"
+  apiServer:
+    certSANs:
+      - "{{ ansible_all_ipv4_addresses | ansible.utils.ipaddr('10.96.0.0/16') | first }}"
+      - "k8s.derwitt.me"
+  controllerManager:
+    extraArgs:
+      bind-address: "0.0.0.0"
+  scheduler:
+    extraArgs:
+      bind-address: "0.0.0.0"
+
+hcloud_token: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  35316366376137323530383064376265336362323033393231656362616362363134623863393439
+  3766626539376161373237396635646565353936633632620a353032376336313662353431346166
+  64323239626636623131333937316461316166613637346265313038343161363934376139323230
+  3032383563663166390a336464376334393863356534336434623932313933336136363934303364
+  63303738333130396531656566313833663133396661373235663839313435306631613336663534
+  64666430313037303264343661623237656366383266346261623530313737373837613632306461
+  64366561313665386633313261356363326239656364303631376436376338373565643134633566
+  37353035383761326431
+hcloud_csi_driver_volume_default_location: "fsn1"
+cilium_version: 1.15.1
+cilium_cli_version: v0.15.23

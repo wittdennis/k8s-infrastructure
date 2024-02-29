@@ -1,0 +1,8 @@
+---
+# defaults file for roles/helm
+install_helm__version: v3.14.0
+
+install_helm__architecture_mapping:
+  x86_64: amd64
+  aarch64: arm64
+  

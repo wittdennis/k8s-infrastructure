@@ -1,0 +1,27 @@
+---
+kubeadm_init__apiserver_bind_port: 443
+kubeadm_init__pod_network_cidr: "10.128.0.0/16"
+
+kubeadm_init__init_configuration:
+  localAPIEndpoint:
+    advertiseAddress: "{{ ansible_all_ipv4_addresses | ansible.utils.ipaddr('private') | first }}"
+    bindPort: "{{ kubeadm_init__apiserver_bind_port }}"
+
+kubeadm_init__cluster_configuration:
+  networking:
+    podSubnet: "{{ kubeadm_init__pod_network_cidr }}"
+  kubernetesVersion: "{{ kubeadm_init__version }}"
+  apiServer:
+    certSANs:
+      - "{{ ansible_all_ipv4_addresses | ansible.utils.ipaddr('private') | first }}"
+  controllerManager:
+    extraArgs:
+      bind-address: "0.0.0.0"
+  scheduler:
+    extraArgs:
+      bind-address: "0.0.0.0"
+
+kubeadm_init__kubelet_configuration:
+  cgroupDriver: "systemd"
+
+kubeadm_init__kube_proxy_configuration: {}

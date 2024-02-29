@@ -1,0 +1,6 @@
+---
+# defaults file for roles/cilium
+cilium__version: "1.15.1"
+cilium__install_cli: false
+cilium__cli_version: "v0.15.23"
+cilium__cli_install_method: "cli"
