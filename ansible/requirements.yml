@@ -1,9 +1,7 @@
 ---
 roles:
   - name: exploide.dnf-automatic
-  - name: githubixx.cilium_kubernetes
 
 collections:
   - name: devsec.hardening
   - name: kubernetes.core
-  - name: ansible.posix  
