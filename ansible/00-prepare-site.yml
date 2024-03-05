@@ -5,10 +5,10 @@
   vars_files:
     - ./vars.yml
   roles:
-    - role: user
+    - role: wittdennis.user
       vars:
         user__login: "{{ personal_user }}"
-        user__password: "{{ personal_user_password }}"
+        user__password_hash: "{{ personal_user_password }}"
         user__public_key_file: "{{ personal_user_public_key_file }}"
         user__allow_sudo_superuser: true
 

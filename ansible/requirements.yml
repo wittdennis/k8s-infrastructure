@@ -1,6 +1,7 @@
 ---
 roles:
   - name: exploide.dnf-automatic
+  - name: wittdennis.user
 
 collections:
   - name: devsec.hardening
