@@ -9,7 +9,7 @@
   become_user: root
   roles:
     - containerd
-    - role: install_helm
+    - role: wittdennis.install_helm
       vars:
         install_helm__version: "{{ helm_version }}"
     - role: install_yq

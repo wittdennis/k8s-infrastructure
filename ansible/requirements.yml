@@ -2,6 +2,8 @@
 roles:
   - name: exploide.dnf-automatic
   - name: wittdennis.user
+  - name: wittdennis.install_helm
+    version: v1.0.0
 
 collections:
   - name: devsec.hardening
