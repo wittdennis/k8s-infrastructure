@@ -32,3 +32,12 @@ output "bastion_host_ssh" {
     ipv6 = node.public_ipv6
   }]
 }
+
+output "bastion_host_wireguard" {
+  value = [for i, node in module.bastion_wireguard : {
+    id   = node.server_id
+    name = node.name
+    ipv4 = node.public_ipv4
+    ipv6 = node.public_ipv6
+  }]
+}

@@ -13,6 +13,43 @@ resource "hcloud_firewall" "firewall_bastion_ssh" {
   }
 }
 
+resource "hcloud_firewall" "firewall_wireguard" {
+  name = "fw-wireguard"
+
+  rule {
+    direction   = "in"
+    protocol    = "udp"
+    port        = "51820"
+    description = "wireguard"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+
+  rule {
+    direction   = "in"
+    protocol    = "tcp"
+    port        = "443"
+    description = "https"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+
+  rule {
+    direction   = "in"
+    protocol    = "tcp"
+    port        = "80"
+    description = "http"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
+}
+
 resource "hcloud_firewall" "firewall_worker" {
   name = "fw-worker"
 

@@ -80,3 +80,25 @@ module "bastion_ssh" {
     "bastion-role" : "ssh"
   }
 }
+
+module "bastion_wireguard" {
+  source             = "wittdennis/compute/hetzner"
+  version            = "1.0.0"
+  server_type        = "cax11"
+  name               = "bastion-wireguard"
+  image              = "wireguard"
+  auto_generate_name = false
+  delete_protection  = true
+  ipv4_enabled       = true
+  ipv6_enabled       = true
+  location           = var.location
+  subnet_id          = module.network.subnet_id
+  ssh_key_ids        = module.ssh_keys.ssh_key_ids
+  firewall_ids       = [hcloud_firewall.firewall_wireguard.id]
+  count              = 1
+
+  labels = {
+    "role" : "bastion-host"
+    "bastion-role" : "wireguard"
+  }
+}
