@@ -47,7 +47,7 @@ module "worker_nodes" {
   load_balancer_id  = module.loadbalancer.loadbalancer_id
   subnet_id         = module.network.subnet_id
   ssh_key_ids       = module.ssh_keys.ssh_key_ids
-  count             = 2
+  count             = 3
 
   labels = {
     "role" : "kubernetes"
