@@ -56,14 +56,18 @@
       net.ipv6.conf.all.forwarding = 1
     dest: /etc/sysctl.d/kubernetes.conf
     mode: "0644"
-  notify: Reload sysctl
+  notify: Reboot system
+
+- name: Set packages version
+  ansible.builtin.set_fact:
+    kubernetes_packages_version: "{{ kubeadm_install__kubernetes_version | regex_replace('v', '') }}"
 
 - name: Install Kubernetes packages
   ansible.builtin.dnf:
     name:
-      - kubelet
-      - kubeadm
-      - kubectl
+      - kubelet-{{ kubernetes_packages_version }}
+      - kubeadm-{{ kubernetes_packages_version }}
+      - kubectl-{{ kubernetes_packages_version }}
     disable_excludes: all
   notify: Restart kubelet
 

@@ -1,1 +1,0 @@
-ansible_ssh_common_args: '-J dwitt@bastion.derwitt.me:12458'

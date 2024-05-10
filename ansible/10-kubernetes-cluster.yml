@@ -1,5 +1,21 @@
 ---
-- name: Install prerequisites
+- name: Install base packages
+  hosts: label_role_kubernetes
+  vars_files:
+    - ./vars.yml
+  remote_user: "{{ personal_user }}"
+  become: true
+  become_method: ansible.builtin.sudo
+  become_user: root
+  tasks:
+    - name: Install base packages
+      ansible.builtin.package:
+        state: present
+        name:
+          - tar
+          - gzip
+
+- name: Install k8s prerequisites
   hosts: label_role_kubernetes
   vars_files:
     - ./vars.yml
@@ -48,7 +64,7 @@
         cilium__cli_version: "{{ cilium_cli_version }}"
 
 - name: Setup kubernetes worker nodes
-  hosts: label_kubernetes_role_worker
+  hosts: label_role_kubernetes
   vars_files:
     - ./vars.yml
   remote_user: "{{ personal_user }}"
