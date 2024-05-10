@@ -80,7 +80,7 @@ resource "hcloud_firewall" "firewall_control_plane" {
   rule {
     direction   = "in"
     protocol    = "tcp"
-    port        = "6443"
+    port        = "443"
     description = "kube-apiserver"
     source_ips = [
       "0.0.0.0/0",
