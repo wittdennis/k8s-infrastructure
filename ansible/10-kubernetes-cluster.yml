@@ -14,6 +14,7 @@
         name:
           - tar
           - gzip
+          - jq
 
 - name: Install k8s prerequisites
   hosts: label_role_kubernetes
@@ -58,10 +59,9 @@
         kubernetes_hcloud__volume_default_location: "{{ hcloud_csi_driver_volume_default_location }}"
     - role: cilium
       vars:
-        cilium__install_cli: true
-        cilium__install_method: "cli"
         cilium__version: "{{ cilium_version }}"
         cilium__cli_version: "{{ cilium_cli_version }}"
+        cilium__enable_hubble: true
 
 - name: Setup kubernetes worker nodes
   hosts: label_role_kubernetes
