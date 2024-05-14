@@ -25,9 +25,8 @@
     - cilium-install
 
 - name: CILIUM | Hubble
-  when: cilium__enable_hubble == true | default(false)
   ansible.builtin.include_tasks:
-    file: enable-hubble.yml
+    file: hubble.yml
   tags:
     - cilium
     - cilium-hubble
