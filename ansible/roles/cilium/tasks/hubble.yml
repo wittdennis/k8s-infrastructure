@@ -16,7 +16,7 @@
   register: enable_hubble_cmd
   changed_when: enable_hubble_cmd.rc == 0
   ansible.builtin.command:
-    cmd: "/usr/local/bin/cilium hubble enable"
+    cmd: "/usr/local/bin/cilium hubble enable --ui"
   tags:
     - cilium
     - cilium-hubble
