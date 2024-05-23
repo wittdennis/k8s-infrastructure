@@ -11,7 +11,7 @@ yq_version: v4.43.1
 kubernetes_version: v1.29.2
 kubernetes_pod_cidr: "10.128.0.0/16"
 kubernetes_cluster_init_configuration:
-  controlPlaneEndpoint: k8s.derwitt.me
+  controlPlaneEndpoint: k8s.derwitt.dev
   localAPIEndpoint:
     advertiseAddress: "{{ ansible_all_ipv4_addresses | ansible.utils.ipaddr('10.96.0.0/16') | first }}"
     bindPort: 443

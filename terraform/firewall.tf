@@ -107,15 +107,4 @@ resource "hcloud_firewall" "firewall_control_plane" {
       module.network.subnet_ip_range
     ]
   }
-
-  rule {
-    direction   = "in"
-    protocol    = "tcp"
-    port        = "10260"
-    description = "cert-manager-webhook"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
 }
