@@ -31,6 +31,12 @@ kubernetes_cluster_configuration:
       - "{{ ansible_all_ipv4_addresses | ansible.utils.ipaddr('10.96.0.0/16') | first }}"
       - "k8s.derwitt.me"
       - "k8s.derwitt.dev"
+    extraArgs:
+      oidc-issuer-url: https://auth.derwitt.dev
+      oidc-client-id: kubelogin
+      oidc-groups-claim: groups
+      oidc-username-claim: email
+      oidc-ca-file: /etc/ssl/certs/ca-bundle.crt
   controllerManager:
     extraArgs:
       bind-address: "0.0.0.0"
