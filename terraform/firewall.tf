@@ -83,8 +83,8 @@ resource "hcloud_firewall" "firewall_control_plane" {
     port        = "443"
     description = "kube-apiserver"
     source_ips = [
-      "0.0.0.0/0",
-      "::/0"
+      "172.30.0.0/24",
+      "2a01:4f8:c012:f0b3:ac1e::/120"
     ]
   }
 
