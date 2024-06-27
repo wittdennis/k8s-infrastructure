@@ -1,4 +1,0 @@
----
-# defaults file for roles/install_yq
-install_yq__version: "v4.42.1"
-install_yq__arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"

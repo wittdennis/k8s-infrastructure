@@ -1,3 +1,0 @@
----
-containerd__docker_yum_repo_url: https://download.docker.com/linux/centos/docker-ce.repo
-containerd__containerd_config_default_write: true
