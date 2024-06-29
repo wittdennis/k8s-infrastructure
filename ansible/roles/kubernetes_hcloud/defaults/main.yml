@@ -1,8 +1,0 @@
----
-# defaults file for roles/kubernetes_hcloud
-kubernetes_hcloud__controller_manager_chart_version: v1.19.0
-kubernetes_hcloud__csi_driver_chart_version: v2.7.0
-kubernetes_hcloud__monitoring_enabled: true
-kubernetes_hcloud__networking_enabled: true
-kubernetes_hcloud__volume_default_location: nbg1
-kubernetes_hcloud__cloud_provider_kubelet_extra_args_through_systemd_unit: false
